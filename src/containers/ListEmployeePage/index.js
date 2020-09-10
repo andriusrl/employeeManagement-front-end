@@ -11,6 +11,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import { removeEmployee } from "../../actions/employee";
+import moment from 'moment'
 
 const SelectCityPageWrapper = styled.div`
     display: flex;
@@ -25,35 +26,44 @@ class ResultPage extends React.Component {
         }
     }
 
+    removeEmployee = (index) => {
+        if (window.confirm("Para remover pressione OK!")) {
+            this.props.removeEmployee(index)
+        }
+    }
+
+    showEmployees = () => {
+        return (
+            <TableBody>
+                {
+                    this.props.getEmployee.map((employee, index) => {
+                        return (
+                            <TableRow key={index}>
+                                <TableCell>
+                                    <div>
+                                        {employee.name} {employee.lastName}
+                                    </div>
+                                    <div>
+                                        Nasc: {moment(employee.birth).format('DD/MM/YYYY')} Salário: {employee.salary}
+                                    </div>
+                                </TableCell>
+                                <TableCell align="right"><button onClick={() => { this.removeEmployee(index) }} >Remover</button></TableCell>
+                            </TableRow>
+                        )
+                    })
+                }
+            </TableBody>
+        )
+    }
 
     render() {
-        // console.log(this.props.getEmployee)
         return (
             <SelectCityPageWrapper>
                 <Typography variant="h6" gutterBottom>
                     Lista de funcionários
                 </Typography>
                 <Table aria-label="simple table">
-                    <TableBody>
-                        {
-                            this.props.getEmployee.map((employee, index) => {
-                                return (
-                                    <TableRow>
-                                        <TableCell>
-                                            <div>
-                                                {employee.name} {employee.lastName}
-                                            </div>
-                                            <div>
-                                                Nasc: {employee.birth} Salário: {employee.salary}
-                                            </div>
-                                        </TableCell>
-                                        <TableCell align="right"><button onClick={()=>{this.props.removeEmployee(index)}} >Deletar</button></TableCell>
-                                        {/* <TableCell>{employee.name} {employee.lastName}</TableCell> */}
-                                    </TableRow>
-                                )
-                            })
-                        }
-                    </TableBody>
+                    {this.showEmployees()}
                 </Table>
             </SelectCityPageWrapper>
         )

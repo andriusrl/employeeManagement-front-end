@@ -15,7 +15,7 @@ const initialState = [
     },
     {
         name: "Julio",
-        lastName: "Tomate Goiano",
+        lastName: "Tomarante Goiano",
         role: "full-stack",
         birth: "1992-12-23",
         salary: "6399",
