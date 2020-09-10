@@ -1,5 +1,5 @@
 const initialState = {
-    roleData: []
+    roleData: ["back-end", "front-end", "full-stack"]
 }
 
 const role = (state = initialState, action) => {
