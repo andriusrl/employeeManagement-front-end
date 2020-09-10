@@ -5,44 +5,46 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { addRole } from "../../actions/role";
 
 
-const SelectCityPageWrapper = styled.form`
+const SignupRolePageWrapper = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
 `
 
-class SelectCityPage extends React.Component {
+class SignupRolePage extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            inputSearch: "",
+            inputRole: "",
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.props.addRole(this.state.inputRole)
+        alert(`Cargo [${this.state.inputRole}] cadastrado com sucesso!`)
     }
 
     handleInputChange = (e) => {
         this.setState({
-            inputSearch: e.target.value
+            inputRole: e.target.value
         })
     }
 
     
     render() {
+        console.log("Testando valor redux role")
+        console.log(this.props.getRole)
         return (
-            <SelectCityPageWrapper onSubmit={this.handleSubmit}>
+            <SignupRolePageWrapper onSubmit={this.handleSubmit}>
                 <Typography variant="h5" gutterBottom>
-                    Cadastro
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                    Teste
+                    Cadastro de cargo
                 </Typography>
                 <Box m={2} />
-                <TextField id="outlined-basic" label="Insira o nome" variant="outlined" value={this.state.inputSearch} onChange={this.handleInputChange} />
+                <TextField id="outlined-basic" label="Insira o nome cargo" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
                 <Box m={1} />
                 <Button
                     type="submit"
@@ -52,12 +54,23 @@ class SelectCityPage extends React.Component {
                 >
                     Cadastrar
                 </Button>
-            </SelectCityPageWrapper>
+                <Box m={1} />
+            </SignupRolePageWrapper>
         )
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        getRole: state.role.roleData
+    }
+  }
 
-export default connect(null, null)(SelectCityPage);
+const mapDispatchToProps = dispatch => ({
+    addRole: (role) => dispatch(addRole(role))
+  })
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupRolePage);
 
 
