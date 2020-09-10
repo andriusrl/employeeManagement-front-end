@@ -7,17 +7,17 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 
-const SelectCityPageWrapper = styled.form`
+const SignupRolePageWrapper = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
 `
 
-class SelectCityPage extends React.Component {
+class SignupRolePage extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            inputSearch: "",
+            inputRole: "",
         }
     }
 
@@ -27,22 +27,19 @@ class SelectCityPage extends React.Component {
 
     handleInputChange = (e) => {
         this.setState({
-            inputSearch: e.target.value
+            inputRole: e.target.value
         })
     }
 
     
     render() {
         return (
-            <SelectCityPageWrapper onSubmit={this.handleSubmit}>
+            <SignupRolePageWrapper onSubmit={this.handleSubmit}>
                 <Typography variant="h5" gutterBottom>
-                    Cadastro
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                    Teste
+                    Cadastro de cargo
                 </Typography>
                 <Box m={2} />
-                <TextField id="outlined-basic" label="Insira o nome" variant="outlined" value={this.state.inputSearch} onChange={this.handleInputChange} />
+                <TextField id="outlined-basic" label="Insira o nome cargo" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
                 <Box m={1} />
                 <Button
                     type="submit"
@@ -52,12 +49,13 @@ class SelectCityPage extends React.Component {
                 >
                     Cadastrar
                 </Button>
-            </SelectCityPageWrapper>
+                <Box m={1} />
+            </SignupRolePageWrapper>
         )
     }
 }
 
 
-export default connect(null, null)(SelectCityPage);
+export default connect(null, null)(SignupRolePage);
 
 

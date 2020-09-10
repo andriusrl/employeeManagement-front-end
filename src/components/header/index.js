@@ -39,8 +39,8 @@ function Headers(props) {
         <MenuItem onClick={props.setSelectCityPageRoute}>Pesquisar Cidade</MenuItem>
         <MenuItem onClick={()=>{alert("Andrius Rocha Lazarino - andrius.rochalazarino@gmail.com")}}>Saiba mais</MenuItem>
       </Menu>
-        <Typography variant="h6" color="inherit">
-          Bolsa Familia
+        <Typography variant="h7" color="inherit">
+          Gerenciador de funcionários
         </Typography>
       </Toolbar>
     </AppBar>
