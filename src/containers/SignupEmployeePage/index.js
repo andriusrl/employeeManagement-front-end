@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import { addRole } from "../../actions/role";
+import { addEmployee } from "../../actions/employee";
 
 import NumberFormat from 'react-number-format';
 
@@ -18,64 +18,112 @@ const SignupEmployeeWrapper = styled.form`
 
 function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
-  
-    return (
-      <NumberFormat
-        {...other}
-        getInputRef={inputRef}
-        onValueChange={(values) => {
-          onChange({
-            target: {
-              name: props.name,
-              value: values.value,
-            },
-          });
-        }}
-        thousandSeparator
-        isNumericString
-        prefix="$"
-      />
-    );
-  }
 
-  class SignupEmployeePage extends React.Component {
+    return (
+        <NumberFormat
+            {...other}
+            getInputRef={inputRef}
+            onValueChange={(values) => {
+                onChange({
+                    target: {
+                        name: props.name,
+                        value: values.value,
+                    },
+                });
+            }}
+            thousandSeparator
+            isNumericString
+            prefix="$"
+        />
+    );
+}
+
+class SignupEmployeePage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            inputRole: "",
+            name: "",
+            lastName: "",
+            role: "",
+            birth: "",
+            salary: "",
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.addRole(this.state.inputRole)
-        alert(`Cargo [${this.state.inputRole}] cadastrado com sucesso!`)
+        this.props.addEmployee({
+            name: this.state.name,
+            lastName: this.state.lastName,
+            role: this.state.role,
+            birth: this.state.birth,
+            salary: this.state.salary,
+        })
+        alert(`Funcionário [${this.state.name}] cadastrado com sucesso!`)
     }
 
     handleInputChange = (e) => {
+        const { name, value } = e.target
         this.setState({
-            inputRole: e.target.value
+            [name]: [value]
         })
     }
 
 
     render() {
-        console.log("Testando valor redux role")
-        console.log(this.props.getRole)
+        // console.log("Testando valor redux role")
+        // console.log(this.props.getRole)
+        console.log("Testando adicionar funcionario")
+        console.log(this.props.getEmployee)
         return (
             <SignupEmployeeWrapper onSubmit={this.handleSubmit}>
                 <Typography variant="h5" gutterBottom>
                     Cadastro de funcinários
                 </Typography>
                 <Box m={2} />
-                <TextField id="outlined-basic" label="Insira o nome" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
-                <TextField id="outlined-basic" label="Insira o sobrenome" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
+                <TextField name="name" id="outlined-basic" label="Insira o nome" variant="outlined" value={this.state.name} onChange={this.handleInputChange} />
+
+                <Box m={1} />
+
+                <TextField name="lastName" id="outlined-basic" label="Insira o sobrenome" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
+
+                <Box m={1} />
+
                 <TextField
+                    name="salary"
+                    label="Salário"
+                    value={parseInt(this.state.salary)}
+                    onChange={this.handleInputChange}
+                    InputProps={{
+                        inputComponent: NumberFormatCustom,
+                    }}
+                />
+
+                <Box m={1} />
+
+                <TextField
+                    name="birth"
+                    id="date"
+                    label="Data de nascimento"
+                    type="date"
+                    // defaultValue="2017-05-24"
+                    value={this.state.birth}
+                    onChange={this.handleInputChange}
+                    // className={classes.textField}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                />
+
+                <Box m={1} />
+
+                <TextField
+                    name="role"
                     id="outlined-select-currency-native"
                     select
-                    label="Native select"
-                    // value={currency}
-                    // onChange={handleChange}
+                    label="Selecione o cargo"
+                    value={this.state.role}
+                    onChange={this.handleInputChange}
                     SelectProps={{
                         native: true,
                     }}
@@ -91,28 +139,9 @@ function NumberFormatCustom(props) {
                         })
                     }
                 </TextField>
-                <TextField
-                    id="date"
-                    label="Data de nascimento"
-                    type="date"
-                    // defaultValue="2017-05-24"
-                    // className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
-
-                <TextField
-                    label="Salário"
-                    // value={values.numberformat}
-                    // onChange={handleChange}
-                    name="numberformat"
-                    InputProps={{
-                        inputComponent: NumberFormatCustom,
-                    }}
-                />
 
                 <Box m={1} />
+
                 <Button
                     type="submit"
                     variant="contained"
@@ -129,12 +158,13 @@ function NumberFormatCustom(props) {
 
 const mapStateToProps = state => {
     return {
-        getRole: state.role.roleData
+        getRole: state.role.roleData,
+        getEmployee: state.employee
     }
 }
 
 const mapDispatchToProps = dispatch => ({
-    addRole: (role) => dispatch(addRole(role))
+    addEmployee: (employee) => dispatch(addEmployee(employee))
 })
 
 

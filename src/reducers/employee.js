@@ -1,13 +1,11 @@
-const initialState = {
-    employeeData: "Vazio"
-}
+const initialState = []
 
 const employees = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_EMPLOYEE': {
-            return {
-                employeeData: "Teste"
-            }
+        case 'ADD_EMPLOYEE': {
+            return [
+                ...state, action.payload.employee
+            ]
         };
         default:
             return state;
