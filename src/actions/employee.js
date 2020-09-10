@@ -6,3 +6,12 @@ export const addEmployee = employee => {
         }
     }
 }
+
+export const removeEmployee = index => {
+    return {
+        type: 'REMOVE_EMPLOYEE',
+        payload: {
+            index
+        }
+    }
+}

@@ -2,7 +2,7 @@ import React from "react";
 import { ConnectedRouter } from "connected-react-router";
 import { Switch, Route } from "react-router-dom";
 import SignupRolePage from "../SignupRolePage/index.js"
-import ResultPage from "../../containers/ResultPage"
+import ListEmployeePage from "../ListEmployeePage"
 import LoadingPage from "../../containers/LoadingPage"
 import ErrorPage from "../../containers/ErrorPage"
 import SignupEmployeePage from "../../containers/SignupEmployeePage"
@@ -11,7 +11,7 @@ import SignupEmployeePage from "../../containers/SignupEmployeePage"
 export const routes = {
     root: "/",
     signupEmployee: "/cadastro/funcinario",
-    result: "/resultado",
+    ListEmployee: "/listar/funcionario",
     loading: "/loading",
     error: "/error"
   };
@@ -22,7 +22,7 @@ export const routes = {
             <Switch>
                 <Route exact path={routes.root} component={SignupRolePage} />
                 <Route exact path={routes.signupEmployee} component={SignupEmployeePage} />
-                <Route exact path={routes.result} component={ResultPage} />
+                <Route exact path={routes.ListEmployee} component={ListEmployeePage} />
                 <Route exact path={routes.loading} component={LoadingPage} />
                 <Route exact path={routes.error} component={ErrorPage} />
 
