@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { addRole } from "../../actions/role";
 
 
 const SignupRolePageWrapper = styled.form`
@@ -23,6 +24,8 @@ class SignupRolePage extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
+        this.props.addRole(this.state.inputRole)
+        alert(`Cargo [${this.state.inputRole}] cadastrado com sucesso!`)
     }
 
     handleInputChange = (e) => {
@@ -33,6 +36,8 @@ class SignupRolePage extends React.Component {
 
     
     render() {
+        console.log("Testando valor redux role")
+        console.log(this.props.getRole)
         return (
             <SignupRolePageWrapper onSubmit={this.handleSubmit}>
                 <Typography variant="h5" gutterBottom>
@@ -55,7 +60,17 @@ class SignupRolePage extends React.Component {
     }
 }
 
+const mapStateToProps = state => {
+    return {
+        getRole: state.role.roleData
+    }
+  }
 
-export default connect(null, null)(SignupRolePage);
+const mapDispatchToProps = dispatch => ({
+    addRole: (role) => dispatch(addRole(role))
+  })
+  
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupRolePage);
 
 

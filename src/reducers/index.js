@@ -1,11 +1,14 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from "connected-react-router";
 import menu from "./menu";
-import employees from "./employees";
+import employee from "./employee";
+import role from "./role";
+
 
 export const generateReducers = history =>
   combineReducers({
     router: connectRouter(history),
-    employees,
+    employee,
     menu,
+    role
   });
