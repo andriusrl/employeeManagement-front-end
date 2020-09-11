@@ -211,8 +211,8 @@ class SignupEmployeePage extends React.Component {
                     <DialogTitle>{"Funcionário cadastrado com sucesso!"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Nome do funcinário: {this.props.getEmployee[this.props.getEmployee.length - 1].name}
-                            {this.props.getEmployee[this.props.getEmployee.length - 1].lastName}
+                            Nome do funcinário: {this.props?.getEmployee[this.props.getEmployee.length - 1]?.name}
+                            {this.props?.getEmployee[this.props.getEmployee.length - 1]?.lastName}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
