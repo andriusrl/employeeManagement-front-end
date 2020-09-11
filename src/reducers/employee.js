@@ -8,7 +8,7 @@ const initialState = [
     },
     {
         name: "Bento",
-        lastName: "Silva Sauro",
+        lastName: "Silva Salo",
         role: "front-end",
         birth: "1996-12-23",
         salary: "4399",

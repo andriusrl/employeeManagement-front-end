@@ -49,7 +49,9 @@ class ListRolePage extends React.Component {
                         return (
                             <TableRow key={index}>
                                 <TableCell>
-                                    {role}
+                                    <Typography variant="subtitle2">
+                                        {role}
+                                    </Typography>
                                 </TableCell>
                                 <TableCell align="right"><Button variant="contained" color="secondary" onClick={() => { this.removeRole(index) }} >Remover</Button></TableCell>
                             </TableRow>

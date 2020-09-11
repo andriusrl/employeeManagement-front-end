@@ -51,12 +51,12 @@ class ListEmployeePage extends React.Component {
                         return (
                             <TableRow key={index}>
                                 <TableCell>
-                                    <div>
+                                    <Typography variant="subtitle2">
                                         {employee.name} {employee.lastName}
-                                    </div>
-                                    <div>
+                                    </Typography>
+                                    <Typography variant="body2">
                                         Nasc: {moment(employee.birth).format('DD/MM/YYYY')} Salário: {employee.salary}
-                                    </div>
+                                    </Typography>
                                 </TableCell>
                                 <TableCell align="right"><Button variant="contained" color="secondary" onClick={() => { this.removeEmployee(index) }} >Remover</Button></TableCell>
                             </TableRow>
@@ -116,9 +116,6 @@ class ListEmployeePage extends React.Component {
                         <Button
                             onClick={() => {
                                 this.props.removeEmployee(this.state.indexEmployeeToRemove)
-                                // this.setState({
-                                //     indexEmployeeToRemove: 0
-                                // })
                                 this.handleClose()
                             }}
                             color="primary" autoFocus

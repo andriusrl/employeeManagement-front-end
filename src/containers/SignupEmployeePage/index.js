@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { addEmployee } from "../../actions/employee";
 import NumberFormat from 'react-number-format';
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -141,7 +140,6 @@ class SignupEmployeePage extends React.Component {
                     <TextField
                         name="birth"
                         required
-                        // label="Data de nascimento"
                         type="date"
                         value={this.state.birth}
                         onChange={this.handleInputChange}
