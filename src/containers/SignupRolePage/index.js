@@ -33,11 +33,17 @@ class SignupRolePage extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        this.props.addRole(this.state.inputRole)
-        this.handleClickOpen()
-        this.setState({
-            inputRole: ""
-        })
+        const input = this.state.inputRole
+        if ((input === "") || (input === " ")) {
+            alert("Campo vazio")
+        }
+        else {
+            this.props.addRole(this.state.inputRole)
+            this.handleClickOpen()
+            this.setState({
+                inputRole: ""
+            })
+        }
     }
 
     handleInputChange = (e) => {
@@ -51,7 +57,7 @@ class SignupRolePage extends React.Component {
             dialogStatus: true
         })
     };
-    
+
     handleClose = () => {
         this.setState({
             dialogStatus: false
@@ -88,7 +94,7 @@ class SignupRolePage extends React.Component {
                     <DialogTitle>{"Cargo criado com sucesso!"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Nome do cargo: {this.props.getRole[this.props.getRole.length-1]}
+                            Nome do cargo: {this.props.getRole[this.props.getRole.length - 1]}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
