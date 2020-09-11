@@ -26,6 +26,10 @@ const store = createStore(generateReducers(history), compose(...middlewares));
 
 const Main = styled.div`
   height: 100vh;
+  @media (min-width: 600px) {
+        width: 70%
+    }
+  margin: 0 auto 0 auto;
 `
 
 ReactDOM.render(
