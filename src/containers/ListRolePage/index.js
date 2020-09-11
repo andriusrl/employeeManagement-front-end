@@ -8,7 +8,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import { removeRole } from "../../actions/role";
-
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -36,7 +35,6 @@ class ListRolePage extends React.Component {
     }
 
     removeRole = (index) => {
-        // console.log(this.props.getEmployee.filter(employee=>{return employee.role === this.props.getRole[index]}).length)
         this.setState({
             indexRoleToRemove: index
         })
@@ -98,7 +96,7 @@ class ListRolePage extends React.Component {
                             {
                             this.props.getEmployee.filter(employee=>{
                                 return employee.role === this.props.getRole[this.state.indexRoleToRemove]}).length > 0 
-                                    ?<div>Atenção: Cargo ligado a funcionário</div>
+                                    ?<DialogContentText>Atenção: Cargo ligado a funcionário</DialogContentText>
                                     :false
                             }
                         </DialogContentText>
@@ -121,6 +119,7 @@ class ListRolePage extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                {this.props.getRole.length===0?<DialogContentText>Não há cargos cadastrados</DialogContentText> : false}
             </ListRolePageWrapper>
         )
     }
@@ -138,5 +137,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListRolePage);
-
-
