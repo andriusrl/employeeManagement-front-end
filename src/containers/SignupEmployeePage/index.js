@@ -158,7 +158,7 @@ class SignupEmployeePage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        getRole: state.role.roleData,
+        getRole: state.role,
         getEmployee: state.employee
     }
 }

@@ -19,7 +19,7 @@ const SelectCityPageWrapper = styled.div`
     align-items: center;
 `
 
-class ResultPage extends React.Component {
+class ListEmployeePage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -47,7 +47,7 @@ class ResultPage extends React.Component {
                                         Nasc: {moment(employee.birth).format('DD/MM/YYYY')} Salário: {employee.salary}
                                     </div>
                                 </TableCell>
-                                <TableCell align="right"><button onClick={() => { this.removeEmployee(index) }} >Remover</button></TableCell>
+                                <TableCell align="right"><Button variant="contained" color="secondary" onClick={() => { this.removeEmployee(index) }} >Remover</Button></TableCell>
                             </TableRow>
                         )
                     })
@@ -80,6 +80,6 @@ const mapDispatchToProps = dispatch => ({
     removeEmployee: (index) => dispatch(removeEmployee(index))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResultPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ListEmployeePage);
 
 
