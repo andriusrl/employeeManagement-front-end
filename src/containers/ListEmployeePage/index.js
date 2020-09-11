@@ -37,9 +37,10 @@ class ListEmployeePage extends React.Component {
 
     removeEmployee = (index) => {
         this.setState({
-            dialogStatus: true,
-            indexEmployeeToRemove: index
+            indexEmployeeToRemove: index,
+            dialogStatus: true
         })
+        
     }
 
     showEmployees = () => {
@@ -79,6 +80,8 @@ class ListEmployeePage extends React.Component {
     };
 
     render() {
+        console.log("Onde da erro")
+        console.log(this.props?.getEmployee[this.state.indexEmployeeToRemove]?.name)
         return (
             <SelectCityPageWrapper>
                 <Typography variant="h6" gutterBottom>
@@ -98,9 +101,9 @@ class ListEmployeePage extends React.Component {
                     <DialogTitle>{"Você tem certeza que deseja remover esse funcionário?"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Nome do funcinário: {this.props.getEmployee[this.state.indexEmployeeToRemove].name}
+                            Nome do funcinário: {this.props?.getEmployee[this.state.indexEmployeeToRemove]?.name}
                             {` `}
-                            {this.props.getEmployee[this.state.indexEmployeeToRemove].lastName}
+                            {this.props.getEmployee[this.state.indexEmployeeToRemove]?.lastName}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -113,6 +116,9 @@ class ListEmployeePage extends React.Component {
                         <Button
                             onClick={() => {
                                 this.props.removeEmployee(this.state.indexEmployeeToRemove)
+                                // this.setState({
+                                //     indexEmployeeToRemove: 0
+                                // })
                                 this.handleClose()
                             }}
                             color="primary" autoFocus
@@ -121,6 +127,7 @@ class ListEmployeePage extends React.Component {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                {this.props.getEmployee.length===0?<DialogContentText>Não há funcionários cadastrados</DialogContentText> : false}
             </SelectCityPageWrapper>
         )
     }
