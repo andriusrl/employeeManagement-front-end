@@ -4,14 +4,14 @@ const initialState = [
         lastName: "Rocha Lazarino",
         role: "full-stack",
         birth: "1993-12-23",
-        salary: "3699",
+        salary: "2900",
     },
     {
         name: "Bento",
         lastName: "Silva Sauro",
         role: "front-end",
         birth: "1996-12-23",
-        salary: "2399",
+        salary: "4399",
     },
     {
         name: "Julio",

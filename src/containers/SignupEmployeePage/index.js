@@ -6,9 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { addEmployee } from "../../actions/employee";
-
 import NumberFormat from 'react-number-format';
-
 
 const SignupEmployeeWrapper = styled.form`
     display: flex;
@@ -71,26 +69,38 @@ class SignupEmployeePage extends React.Component {
 
 
     render() {
-        // console.log("Testando valor redux role")
-        // console.log(this.props.getRole)
-        console.log("Testando adicionar funcionario")
-        console.log(this.props.getEmployee)
         return (
             <SignupEmployeeWrapper onSubmit={this.handleSubmit}>
                 <Typography variant="h5" gutterBottom>
                     Cadastro de funcinários
                 </Typography>
                 <Box m={2} />
-                <TextField name="name" id="outlined-basic" label="Insira o nome" variant="outlined" value={this.state.name} onChange={this.handleInputChange} />
+                <TextField
+                    name="name"
+                    required
+                    id="outlined-basic"
+                    label="Insira o nome"
+                    variant="outlined"
+                    value={this.state.name}
+                    onChange={this.handleInputChange}
+                />
 
                 <Box m={1} />
 
-                <TextField name="lastName" id="outlined-basic" label="Insira o sobrenome" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
+                <TextField
+                    name="lastName"
+                    required
+                    id="outlined-basic"
+                    label="Insira o sobrenome"
+                    variant="outlined" value={this.state.inputRole}
+                    onChange={this.handleInputChange}
+                />
 
                 <Box m={1} />
 
                 <TextField
                     name="salary"
+                    required
                     label="Salário"
                     value={parseInt(this.state.salary)}
                     onChange={this.handleInputChange}
@@ -103,13 +113,11 @@ class SignupEmployeePage extends React.Component {
 
                 <TextField
                     name="birth"
-                    id="date"
+                    required
                     label="Data de nascimento"
                     type="date"
-                    // defaultValue="2017-05-24"
                     value={this.state.birth}
                     onChange={this.handleInputChange}
-                    // className={classes.textField}
                     InputLabelProps={{
                         shrink: true,
                     }}

@@ -11,8 +11,6 @@ import { push } from "connected-react-router";
 import { routes } from '../../containers/Router'
 
 function Headers(props) {
-  console.log("status do header: "+ props.menuStatus)
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -35,17 +33,13 @@ function Headers(props) {
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
-        // disableBackdropClick 
-        // disableEscapeKeyDown
-        // disablePortal
-
       >
         <MenuItem onClick={props.setSignupEmployeePageRoute}>Cadastrar funcionários</MenuItem>
         <MenuItem onClick={props.setListEmployeePageRoute}>Listar funcinários</MenuItem>
         <MenuItem onClick={props.setSignupRolePageRoute}>Cadastrar cargos</MenuItem>
         <MenuItem onClick={props.setListRolePageRoute}>Listar cargos</MenuItem>
       </Menu>
-        <Typography variant="h7" color="inherit">
+        <Typography color="inherit">
           Gerenciador de funcionários
         </Typography>
       </Toolbar>

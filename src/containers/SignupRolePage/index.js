@@ -72,7 +72,14 @@ class SignupRolePage extends React.Component {
                     Cadastro de cargo
                 </Typography>
                 <Box m={2} />
-                <TextField id="outlined-basic" label="Insira o nome cargo" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
+                <TextField
+                    required
+                    id="outlined-basic"
+                    label="Insira o nome cargo"
+                    variant="outlined"
+                    value={this.state.inputRole}
+                    onChange={this.handleInputChange}
+                />
                 <Box m={1} />
                 <Button
                     type="submit"
