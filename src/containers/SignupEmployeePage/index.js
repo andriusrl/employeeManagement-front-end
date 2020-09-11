@@ -21,6 +21,10 @@ const SignupEmployeeWrapper = styled.form`
     align-items: center;
 `
 
+const BirthWrapper = styled.div`
+    display: flex;
+`
+
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -102,7 +106,7 @@ class SignupEmployeePage extends React.Component {
         return (
             <SignupEmployeeWrapper onSubmit={this.handleSubmit}>
                 <Typography variant="h5" gutterBottom>
-                    Cadastro de funcinários
+                    Cadastro de funcionários
                 </Typography>
                 <Box m={2} />
                 <TextField
@@ -128,6 +132,27 @@ class SignupEmployeePage extends React.Component {
 
                 <Box m={1} />
 
+                <BirthWrapper>
+                    <Typography
+                        variant="body1"
+                    >
+                        Data nascimento:
+                    </Typography>
+                    <TextField
+                        name="birth"
+                        required
+                        // label="Data de nascimento"
+                        type="date"
+                        value={this.state.birth}
+                        onChange={this.handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                </BirthWrapper>
+
+                <Box m={1} />
+
                 <TextField
                     name="salary"
                     required
@@ -136,20 +161,6 @@ class SignupEmployeePage extends React.Component {
                     onChange={this.handleInputChange}
                     InputProps={{
                         inputComponent: NumberFormatCustom,
-                    }}
-                />
-
-                <Box m={1} />
-
-                <TextField
-                    name="birth"
-                    required
-                    label="Data de nascimento"
-                    type="date"
-                    value={this.state.birth}
-                    onChange={this.handleInputChange}
-                    InputLabelProps={{
-                        shrink: true,
                     }}
                 />
 
@@ -178,7 +189,7 @@ class SignupEmployeePage extends React.Component {
                     }
                 </TextField>
 
-                <Box m={1} />
+                <Box m={2} />
 
                 <Button
                     type="submit"
@@ -197,10 +208,10 @@ class SignupEmployeePage extends React.Component {
                     aria-labelledby="alert-dialog-slide-title"
                     aria-describedby="alert-dialog-slide-description"
                 >
-                    <DialogTitle>{"Funcinário cadastrado com sucesso!"}</DialogTitle>
+                    <DialogTitle>{"Funcionário cadastrado com sucesso!"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Nome do funcinário: {this.props.getEmployee[this.props.getEmployee.length - 1].name} 
+                            Nome do funcinário: {this.props.getEmployee[this.props.getEmployee.length - 1].name}
                             {this.props.getEmployee[this.props.getEmployee.length - 1].lastName}
                         </DialogContentText>
                     </DialogContent>

@@ -9,6 +9,12 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import { removeEmployee } from "../../actions/employee";
 import moment from 'moment'
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 
 const SelectCityPageWrapper = styled.div`
     display: flex;
@@ -16,17 +22,28 @@ const SelectCityPageWrapper = styled.div`
     align-items: center;
 `
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
+
 class ListEmployeePage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            dialogStatus: false,
+            indexEmployeeToRemove: undefined
         }
     }
 
     removeEmployee = (index) => {
-        if (window.confirm("Para remover pressione OK!")) {
-            this.props.removeEmployee(index)
-        }
+        // if (window.confirm("Para remover pressione OK!")) {
+        //     this.props.removeEmployee(index)
+        // }
+
+        this.setState({
+            dialogStatus: true,
+            indexEmployeeToRemove: index
+        })
     }
 
     showEmployees = () => {
@@ -53,6 +70,18 @@ class ListEmployeePage extends React.Component {
         )
     }
 
+    handleClickOpen = () => {
+        this.setState({
+            dialogStatus: true
+        })
+    };
+
+    handleClose = () => {
+        this.setState({
+            dialogStatus: false
+        })
+    };
+
     render() {
         return (
             <SelectCityPageWrapper>
@@ -62,6 +91,36 @@ class ListEmployeePage extends React.Component {
                 <Table aria-label="simple table">
                     {this.showEmployees()}
                 </Table>
+                <Dialog
+                    open={this.state.dialogStatus}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-slide-title"
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle>{"Você tem certeza que deseja remover esse funcionário?"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Nome do funcinário: {this.props.getEmployee[this.props.getEmployee.length - 1].name}
+                            {this.props.getEmployee[this.props.getEmployee.length - 1].lastName}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Não
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                this.props.removeEmployee(this.state.indexEmployeeToRemove)
+                                this.handleClose()
+                            }}
+                            color="primary" autoFocus
+                        >
+                            Sim
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </SelectCityPageWrapper>
         )
     }
