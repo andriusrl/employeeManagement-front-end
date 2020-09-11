@@ -62,7 +62,7 @@ class SignupRolePage extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        getRole: state.role.roleData
+        getRole: state.role
     }
   }
 
