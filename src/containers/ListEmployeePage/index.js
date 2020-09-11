@@ -31,15 +31,11 @@ class ListEmployeePage extends React.Component {
         super(props)
         this.state = {
             dialogStatus: false,
-            indexEmployeeToRemove: undefined
+            indexEmployeeToRemove: 0
         }
     }
 
     removeEmployee = (index) => {
-        // if (window.confirm("Para remover pressione OK!")) {
-        //     this.props.removeEmployee(index)
-        // }
-
         this.setState({
             dialogStatus: true,
             indexEmployeeToRemove: index
@@ -102,12 +98,16 @@ class ListEmployeePage extends React.Component {
                     <DialogTitle>{"Você tem certeza que deseja remover esse funcionário?"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Nome do funcinário: {this.props.getEmployee[this.props.getEmployee.length - 1].name}
-                            {this.props.getEmployee[this.props.getEmployee.length - 1].lastName}
+                            Nome do funcinário: {this.props.getEmployee[this.state.indexEmployeeToRemove].name}
+                            {` `}
+                            {this.props.getEmployee[this.state.indexEmployeeToRemove].lastName}
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button
+                            onClick={this.handleClose}
+                            color="primary"
+                        >
                             Não
                         </Button>
                         <Button
@@ -137,5 +137,3 @@ const mapDispatchToProps = dispatch => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListEmployeePage);
-
-

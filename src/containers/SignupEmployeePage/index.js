@@ -73,7 +73,6 @@ class SignupEmployeePage extends React.Component {
             birth: this.state.birth,
             salary: this.state.salary,
         })
-        // alert(`Funcionário [${this.state.name}] cadastrado com sucesso!`)
         this.handleClickOpen()
         this.setState({
             name: "",
