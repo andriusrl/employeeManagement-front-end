@@ -8,11 +8,22 @@ import Box from '@material-ui/core/Box';
 import { addEmployee } from "../../actions/employee";
 import NumberFormat from 'react-number-format';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
+
 const SignupEmployeeWrapper = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
 `
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
@@ -45,6 +56,7 @@ class SignupEmployeePage extends React.Component {
             role: "",
             birth: "",
             salary: "",
+            dialogStatus: false
         }
     }
 
@@ -74,6 +86,17 @@ class SignupEmployeePage extends React.Component {
         })
     }
 
+    handleClickOpen = () => {
+        this.setState({
+            dialogStatus: true
+        })
+    };
+
+    handleClose = () => {
+        this.setState({
+            dialogStatus: false
+        })
+    };
 
     render() {
         return (
@@ -166,6 +189,27 @@ class SignupEmployeePage extends React.Component {
                     Cadastrar
                 </Button>
                 <Box m={1} />
+                <Dialog
+                    open={this.state.dialogStatus}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-slide-title"
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle>{"Funcinário cadastrado com sucesso!"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Nome do funcinário: {this.props.getEmployee[this.props.getEmployee.length - 1].name} 
+                            {this.props.getEmployee[this.props.getEmployee.length - 1].lastName}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Fechar
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </SignupEmployeeWrapper>
         )
     }
