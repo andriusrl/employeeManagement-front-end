@@ -58,6 +58,13 @@ class SignupEmployeePage extends React.Component {
             salary: this.state.salary,
         })
         alert(`Funcionário [${this.state.name}] cadastrado com sucesso!`)
+        this.setState({
+            name: "",
+            lastName: "",
+            role: this.props.getRole[0],
+            birth: "",
+            salary: ""
+        })
     }
 
     handleInputChange = (e) => {
@@ -92,7 +99,7 @@ class SignupEmployeePage extends React.Component {
                     required
                     id="outlined-basic"
                     label="Insira o sobrenome"
-                    variant="outlined" value={this.state.inputRole}
+                    variant="outlined" value={this.state.lastName}
                     onChange={this.handleInputChange}
                 />
 
