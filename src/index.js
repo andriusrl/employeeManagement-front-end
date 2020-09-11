@@ -12,8 +12,6 @@ import styled from "styled-components";
 import Headers from './components/header';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-// import { Store } from './store';
 
 export const history = createBrowserHistory();
 
@@ -28,6 +26,10 @@ const store = createStore(generateReducers(history), compose(...middlewares));
 
 const Main = styled.div`
   height: 100vh;
+  @media (min-width: 600px) {
+        width: 70%
+    }
+  margin: 0 auto 0 auto;
 `
 
 ReactDOM.render(

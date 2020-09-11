@@ -4,7 +4,7 @@ const role = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_ROLE': {
             console.log("Entrou no redux "+action.payload.value)
-            return  [...state.roleData, action.payload.value]
+            return  [...state, action.payload.value]
         };
         case 'REMOVE_ROLE': {
             return state.filter((role, index)=>{

@@ -6,15 +6,27 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import { addEmployee } from "../../actions/employee";
-
 import NumberFormat from 'react-number-format';
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 
 const SignupEmployeeWrapper = styled.form`
     display: flex;
     flex-direction: column;
     align-items: center;
 `
+
+const BirthWrapper = styled.div`
+    display: flex;
+`
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
@@ -47,6 +59,7 @@ class SignupEmployeePage extends React.Component {
             role: "",
             birth: "",
             salary: "",
+            dialogStatus: false
         }
     }
 
@@ -59,7 +72,14 @@ class SignupEmployeePage extends React.Component {
             birth: this.state.birth,
             salary: this.state.salary,
         })
-        alert(`Funcionário [${this.state.name}] cadastrado com sucesso!`)
+        this.handleClickOpen()
+        this.setState({
+            name: "",
+            lastName: "",
+            role: this.props.getRole[0],
+            birth: "",
+            salary: ""
+        })
     }
 
     handleInputChange = (e) => {
@@ -69,49 +89,76 @@ class SignupEmployeePage extends React.Component {
         })
     }
 
+    handleClickOpen = () => {
+        this.setState({
+            dialogStatus: true
+        })
+    };
+
+    handleClose = () => {
+        this.setState({
+            dialogStatus: false
+        })
+    };
 
     render() {
-        // console.log("Testando valor redux role")
-        // console.log(this.props.getRole)
-        console.log("Testando adicionar funcionario")
-        console.log(this.props.getEmployee)
         return (
             <SignupEmployeeWrapper onSubmit={this.handleSubmit}>
                 <Typography variant="h5" gutterBottom>
-                    Cadastro de funcinários
+                    Cadastro de funcionários
                 </Typography>
                 <Box m={2} />
-                <TextField name="name" id="outlined-basic" label="Insira o nome" variant="outlined" value={this.state.name} onChange={this.handleInputChange} />
-
-                <Box m={1} />
-
-                <TextField name="lastName" id="outlined-basic" label="Insira o sobrenome" variant="outlined" value={this.state.inputRole} onChange={this.handleInputChange} />
-
-                <Box m={1} />
-
                 <TextField
-                    name="salary"
-                    label="Salário"
-                    value={parseInt(this.state.salary)}
+                    name="name"
+                    required
+                    id="outlined-basic"
+                    label="Insira o nome"
+                    variant="outlined"
+                    value={this.state.name}
                     onChange={this.handleInputChange}
-                    InputProps={{
-                        inputComponent: NumberFormatCustom,
-                    }}
                 />
 
                 <Box m={1} />
 
                 <TextField
-                    name="birth"
-                    id="date"
-                    label="Data de nascimento"
-                    type="date"
-                    // defaultValue="2017-05-24"
-                    value={this.state.birth}
+                    name="lastName"
+                    required
+                    id="outlined-basic"
+                    label="Insira o sobrenome"
+                    variant="outlined" value={this.state.lastName}
                     onChange={this.handleInputChange}
-                    // className={classes.textField}
-                    InputLabelProps={{
-                        shrink: true,
+                />
+
+                <Box m={1} />
+
+                <BirthWrapper>
+                    <Typography
+                        variant="body1"
+                    >
+                        Data nascimento:
+                    </Typography>
+                    <TextField
+                        name="birth"
+                        required
+                        type="date"
+                        value={this.state.birth}
+                        onChange={this.handleInputChange}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                </BirthWrapper>
+
+                <Box m={1} />
+
+                <TextField
+                    name="salary"
+                    required
+                    label="Salário"
+                    value={parseInt(this.state.salary)}
+                    onChange={this.handleInputChange}
+                    InputProps={{
+                        inputComponent: NumberFormatCustom,
                     }}
                 />
 
@@ -140,7 +187,7 @@ class SignupEmployeePage extends React.Component {
                     }
                 </TextField>
 
-                <Box m={1} />
+                <Box m={2} />
 
                 <Button
                     type="submit"
@@ -151,6 +198,27 @@ class SignupEmployeePage extends React.Component {
                     Cadastrar
                 </Button>
                 <Box m={1} />
+                <Dialog
+                    open={this.state.dialogStatus}
+                    TransitionComponent={Transition}
+                    keepMounted
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-slide-title"
+                    aria-describedby="alert-dialog-slide-description"
+                >
+                    <DialogTitle>{"Funcionário cadastrado com sucesso!"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Nome do funcinário: {this.props?.getEmployee[this.props.getEmployee.length - 1]?.name}
+                            {this.props?.getEmployee[this.props.getEmployee.length - 1]?.lastName}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Fechar
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </SignupEmployeeWrapper>
         )
     }

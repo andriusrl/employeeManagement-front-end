@@ -11,8 +11,6 @@ import { push } from "connected-react-router";
 import { routes } from '../../containers/Router'
 
 function Headers(props) {
-  console.log("status do header: "+ props.menuStatus)
-
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -36,10 +34,12 @@ function Headers(props) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={props.setSelectCityPageRoute}>Pesquisar Cidade</MenuItem>
-        <MenuItem onClick={()=>{alert("Andrius Rocha Lazarino - andrius.rochalazarino@gmail.com")}}>Saiba mais</MenuItem>
+        <MenuItem onClick={props.setSignupEmployeePageRoute}>Cadastrar funcionários</MenuItem>
+        <MenuItem onClick={props.setListEmployeePageRoute}>Listar funcinários</MenuItem>
+        <MenuItem onClick={props.setSignupRolePageRoute}>Cadastrar cargos</MenuItem>
+        <MenuItem onClick={props.setListRolePageRoute}>Listar cargos</MenuItem>
       </Menu>
-        <Typography variant="h7" color="inherit">
+        <Typography color="inherit">
           Gerenciador de funcionários
         </Typography>
       </Toolbar>
@@ -54,7 +54,10 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  setSelectCityPageRoute: () => dispatch(push(routes.root))
+  setSignupEmployeePageRoute: () => dispatch(push(routes.signupEmployee)),
+  setListEmployeePageRoute: () => dispatch(push(routes.listEmployee)),
+  setSignupRolePageRoute: () => dispatch(push(routes.signupRole)),
+  setListRolePageRoute: () => dispatch(push(routes.listRole))
 })
 
 
